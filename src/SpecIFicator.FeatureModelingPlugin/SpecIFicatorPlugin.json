@@ -1,0 +1,7 @@
+{
+    "title": "SpecIFicator Feature Modeling Plugin",
+    "description": "Feature Model Editor",
+    "assemblies": [
+        "SpecIFicator.FeatureModelingPlugin.dll"
+    ]
+}
