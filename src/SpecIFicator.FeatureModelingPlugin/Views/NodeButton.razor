@@ -1,0 +1,16 @@
+﻿<span class="dot @Type.ToString().ToLower()">
+    @switch(Type.ToString()){
+        case "Mandatory":
+        <value>M</value>
+        break; 
+        case "Alternative":
+        <value>A</value>
+        break;
+        case "Optional":
+        <value>O</value>
+        break;
+        case "Or":
+        <value>II</value>
+        break;
+    }
+</span>

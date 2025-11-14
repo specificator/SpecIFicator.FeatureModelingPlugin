@@ -1,34 +1,66 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-      <TargetFramework>net6.0</TargetFramework>
-      <Nullable>disable</Nullable>
-      <ImplicitUsings>enable</ImplicitUsings>
-      <AssemblyName>$(MSBuildProjectName.Replace("-dev", ""))</AssemblyName>
-      <AppDataLocalDir>$([System.Environment]::GetFolderPath(SpecialFolder.LocalApplicationData))</AppDataLocalDir>
-      <PluginPath Condition="'$(Configuration)' == 'Debug'">$(AppDataLocalDir)\SpecIFicator\plugins\Debug</PluginPath>
-      <PluginPath Condition="'$(Configuration)' == 'Release'">$(AppDataLocalDir)\SpecIFicator\plugins</PluginPath>
-      <RootNamespace>$(MSBuildProjectName.Replace("-dev", ""))</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AssemblyName>$(MSBuildProjectName.Replace("-dev", ""))</AssemblyName>
+		<AppDataLocalDir>$([System.Environment]::GetFolderPath(SpecialFolder.LocalApplicationData))</AppDataLocalDir>
+		<PluginPath Condition="'$(Configuration)' == 'Debug'">$(AppDataLocalDir)\SpecIFicator\plugins\Debug</PluginPath>
+		<PluginPath Condition="'$(Configuration)' == 'Release'">$(AppDataLocalDir)\SpecIFicator\plugins</PluginPath>
+		<RootNamespace>$(MSBuildProjectName.Replace("-dev", ""))</RootNamespace>
+	</PropertyGroup>
 
 
-  <ItemGroup>
-    <SupportedPlatform Include="browser" />
-  </ItemGroup>
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.36" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.29" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-    <Folder Include="Pages\" />
-    <Folder Include="Views\" />
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy /y $(OutputPath)SpecIFicator.FeatureModelingPlugin.* $(PluginPath)\SpecIFicator.DiagramEditorPlugin\&#xD;&#xA;xcopy /y $(OutputPath)SpecIFicatorPlugin.json $(PluginPath)\SpecIFicator.FeatureModelingPlugin\&#xD;&#xA;rem xcopy /y $(ProjectDir)\obj\$(Configuration)\net6.0\scopedcss\projectbundle\SpecIFicator.FeatureModelingPlugin.bundle.scp.css $(SolutionDir)SpecIFicator.Framework\src\SpecIFicator.Framework\wwwroot\css\pluginStyles\ " />
-  </Target>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\MDD4All.SpecIF.ViewModels\src\MDD4All.SpecIF.ViewModels\MDD4All.SpecIF.ViewModels-dev.csproj" />
+		<ProjectReference Include="..\..\..\MDD4All.UI.BlazorComponents\src\MDD4All.UI.BlazorComponents\MDD4All.UI.BlazorComponents-dev.csproj" />
+		<ProjectReference Include="..\..\..\SpecIFicator.Framework\src\SpecIFicator.Framework\SpecIFicator.Framework-dev.csproj" />
+		<ProjectReference Include="..\..\..\SplitJs.Blazor\src\SplitJs.Blazor\SplitJs.Blazor-dev.csproj" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<Folder Include="Pages\" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <Compile Update="Resources\Views\FeatureModelToolBar.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>FeatureModelToolBar.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Resources\Views\VariantModelCreator.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>VariantModelCreator.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Resources\Views\FeatureModelToolBar.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>FeatureModelToolBar.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\Views\VariantModelCreator.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>VariantModelCreator.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="xcopy /y $(OutputPath)SpecIFicator.FeatureModelingPlugin.* $(PluginPath)\SpecIFicator.FeatureModelingPlugin\&#xD;&#xA;xcopy /y $(OutputPath)SpecIFicatorPlugin.json $(PluginPath)\SpecIFicator.FeatureModelingPlugin\&#xD;&#xA;xcopy /y $(ProjectDir)\obj\$(Configuration)\net6.0\scopedcss\projectbundle\SpecIFicator.FeatureModelingPlugin.bundle.scp.css $(SolutionDir)SpecIFicator.Framework\src\SpecIFicator.Framework\wwwroot\css\pluginStyles\ " />
+	</Target>
 
 </Project>

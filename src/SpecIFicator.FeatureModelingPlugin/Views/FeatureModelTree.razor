@@ -1,0 +1,39 @@
+﻿@using MDD4All.UI.BlazorComponents.Tree
+@using Microsoft.AspNetCore.Components
+@using MDD4All.SpecIF.ViewModels
+@using SpecIFicator.Plugins.BlazorComponents
+@using SpecIFicator.FeatureModelingPlugin.ViewModels
+
+<div class="btn-group" role="group" id="toolbar">
+    <button type="button"
+            class="btn btn-outline-secondary btn-sm"
+            @onclick="() => DataContext.NodeOneLevelLowerCommand.Execute(null)">
+        <i class="bi bi-arrow-bar-left"></i>
+    </button>
+    <button type="button"
+            class="btn btn-outline-secondary btn-sm"
+            @onclick="() => DataContext.NodeOneLevelHigherCommand.Execute(null)">
+        <i class="bi bi-arrow-bar-right"></i>
+    </button>
+    <button type="button"
+            class="btn btn-outline-secondary btn-sm"
+            @onclick="() => DataContext.MoveNodeUpCommand.Execute(null)">
+        <i class="bi bi-arrow-bar-up"></i>
+    </button>
+    <button type="button"
+            class="btn btn-outline-secondary btn-sm"
+            @onclick="() => DataContext.MoveNodeDownCommand.Execute(null)">
+        <i class="bi bi-arrow-bar-down"></i>
+    </button>
+</div>
+<div id="treepanel">
+    <MvvmTree TNode="NodeViewModel" 
+              DataContext="@DataContext"
+              SelectedNodeChanged="OnSelectionChanged">
+
+        <TitleTemplate> <NodeButton Type="@context.FeatureClass().ToString()" IsRoot="@context.Equals(DataContext.RootNode)"></NodeButton>
+                        
+                        &nbsp;@context.TreeNodeText</TitleTemplate>
+        <LoadingTemplate>@context.Level <span class="placeholder-glow"></span></LoadingTemplate>
+    </MvvmTree>
+</div>

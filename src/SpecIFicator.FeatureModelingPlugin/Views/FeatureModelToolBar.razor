@@ -1,0 +1,54 @@
+﻿@using MDD4All.UI.BlazorComponents.Ribbon
+@using MDD4All.UI.BlazorComponents.Dialog
+@using MDD4All.UI.BlazorComponents.PropertyPanel
+<div class="toolbarPanel">
+    <RibbonCategory>
+        <RibbonPanel PanelTitle="@L["Label.NewFeature"]">
+            <FeatureTypeSelector @bind-SelectedType="SelectedType"></FeatureTypeSelector>
+            <div style="text-align: center">
+                <button type="button"
+                        class="btn btn-outline-primary"
+                        @onclick="OnNewChildClicked">
+                    <i class="bi bi-box-arrow-down-right"></i>
+                </button>
+            </div>
+        </RibbonPanel>
+        <RibbonPanel PanelTitle="@L["Label.DeleteResource"]">
+            <div class="toolStackPanel">
+                <button type="button"
+                        class="btn btn-outline-danger btn-lg"
+                        @onclick="OnDeleteRessourceClicked">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </div>
+        </RibbonPanel>
+        <RibbonPanel PanelTitle="@L["Label.AddRelation"]">
+            <div class="toolStackPanel">
+                <button type="button"
+                        class="btn btn-outline-dark btn-lg">
+                    <i class="bi bi-heart-arrow"></i>
+                </button>
+            </div>
+        </RibbonPanel>
+        @if (FeatureModelViewModel.IsInVariantMode)
+        {
+            <RibbonPanel PanelTitle="@L["Label.Save"]">
+                <div class="toolStackPanel">
+                    <button type="button"
+                            class="btn btn-outline-dark btn-lg"
+                            @onclick="OnSaveClicked">
+                        <i class="bi bi-floppy"></i>
+                    </button>
+                </div>
+            </RibbonPanel>
+        }
+        <RibbonPanel PanelTitle="@L["Label.Exit"]">
+            <div class="toolStackPanel">
+                <a href="/pluginPage/B0E82D33-BE3C-4EF7-A8D3-6DE60AB4AB17/@ProjectID.ToString()" type="button"
+                   class="btn btn-outline-danger btn-lg">
+                    <i class="bi bi-box-arrow-left"></i>
+                </a>
+            </div>
+        </RibbonPanel>
+    </RibbonCategory>
+</div>

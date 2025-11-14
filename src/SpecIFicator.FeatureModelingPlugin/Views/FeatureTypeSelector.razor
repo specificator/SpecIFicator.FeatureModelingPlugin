@@ -1,0 +1,12 @@
+﻿@using SpecIFicator.FeatureModelingPlugin.ViewModels
+<select @onchange="OnSelectedTypeChanged">
+    @foreach (FeatureClasses type in Enum.GetValues(typeof(FeatureClasses)))
+    {
+        @if(type != FeatureClasses.Unknown)
+        {
+        <option value="@type">@type.ToString()</option>
+        }
+    }
+</select>
+
+

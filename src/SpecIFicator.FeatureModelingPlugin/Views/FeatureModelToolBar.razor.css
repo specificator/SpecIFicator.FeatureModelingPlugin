@@ -1,0 +1,9 @@
+﻿.toolStackPanel {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-gap: 5px;
+    padding: 3px;
+}

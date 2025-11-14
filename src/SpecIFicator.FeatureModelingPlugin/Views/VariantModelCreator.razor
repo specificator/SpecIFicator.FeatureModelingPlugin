@@ -1,0 +1,17 @@
+﻿@using MDD4All.UI.BlazorComponents.Dialog
+@using SpecIFicator.Plugins.BlazorComponents
+
+@if(DataContext.ShowCreationDialog)
+{
+    <ModalDialog OnClose="@OnNewVariantClose"
+                 DialogType="ModalDialog.ModalDialogType.OkCancel"
+                 Title=@L["Label.NewVariant"]>
+
+        <ResourcePanel ResourceViewModel="@DataContext.VariantModelRoot" />
+
+    </ModalDialog>
+}
+else
+{
+    
+}
